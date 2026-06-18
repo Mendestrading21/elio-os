@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>Elio OS</title>
+<meta name="theme-color" content="#070a12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Elio OS">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+:root{
+  --bg:#070a12; --card:rgba(18,24,42,.78); --card2:rgba(30,38,66,.5);
+  --stroke:rgba(120,160,255,.18); --txt:#e8edff; --mut:#8a93b8;
+  --cyan:#22e0ff; --purple:#9b6dff; --pink:#ff5cd0; --green:#3df5a0; --orange:#ff9d42; --red:#ff5a6e; --gold:#f5c66b;
+  --grad:linear-gradient(135deg,#22e0ff,#9b6dff 55%,#ff5cd0);
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{overscroll-behavior:none}
+body{font-family:-apple-system,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);
+  min-height:100vh;
+  background-image:radial-gradient(700px 400px at 90% -5%,rgba(155,109,255,.22),transparent),
+    radial-gradient(600px 350px at -10% 105%,rgba(34,224,255,.16),transparent),
+    linear-gradient(rgba(120,160,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(120,160,255,.04) 1px,transparent 1px);
+  background-size:auto,auto,34px 34px,34px 34px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:calc(var(--safe-t) + 14px) 16px calc(96px + var(--safe-b))}
+.hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .mk{width:36px;height:36px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:19px;box-shadow:0 0 18px rgba(155,109,255,.6)}
+.brand b{font-size:17px;letter-spacing:.5px;font-weight:800;display:block}
+.brand small{font-size:9px;color:var(--mut);letter-spacing:2px}
+.clk{text-align:right}.clk .t{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.clk .d{font-size:9px;color:var(--mut);letter-spacing:1px;text-transform:uppercase}
+.mantra{padding:11px 14px;border-radius:13px;border:1px solid var(--stroke);font-style:italic;font-size:12.5px;
+  background:linear-gradient(135deg,rgba(34,224,255,.10),rgba(255,92,208,.08));margin-bottom:16px}
+.mantra b{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px;margin-bottom:13px;
+  backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5}
+.card h3{font-size:10.5px;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase;margin-bottom:13px;display:flex;align-items:center;gap:7px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.big{font-size:34px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.sub{color:var(--mut);font-size:11.5px;margin-top:5px}
+.center{text-align:center}
+.ring{display:grid;place-items:center;position:relative}.ring svg{transform:rotate(-90deg)}
+.ring .lab{position:absolute;text-align:center}.ring .lab b{font-size:26px;font-weight:800}.ring .lab span{display:block;font-size:9px;color:var(--mut);letter-spacing:2px}
+.flame{font-size:38px;filter:drop-shadow(0 0 12px rgba(255,140,60,.7))}
+.bar{height:8px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:8px}
+.bar>i{display:block;height:100%;border-radius:6px;background:var(--grad);box-shadow:0 0 10px rgba(155,109,255,.5)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px}
+.row:last-child{border:0}
+.chk{width:30px;height:30px;border-radius:9px;border:1.5px solid var(--stroke);display:grid;place-items:center;font-size:16px;flex-shrink:0;background:rgba(255,255,255,.03);transition:.15s}
+.chk.done{background:var(--grad);border-color:transparent;box-shadow:0 0 14px rgba(34,224,255,.5);color:#06101f}
+.input,select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:11px;color:var(--txt);padding:13px;font-size:16px;font-family:inherit}
+.input:focus,select:focus{outline:none;border-color:var(--purple)}
+label.fld{display:block;font-size:10.5px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin:14px 0 6px}
+.btn{background:var(--grad);color:#06101f;border:0;border-radius:13px;padding:15px;font-weight:800;font-size:15px;width:100%;box-shadow:0 6px 22px rgba(155,109,255,.4);cursor:pointer}
+.btn:active{transform:scale(.99)}.btn.ghost{background:rgba(255,255,255,.05);color:var(--txt);border:1px solid var(--stroke);box-shadow:none}
+.cnt{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cnt button{width:52px;height:52px;border-radius:13px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);color:var(--txt);font-size:24px;font-weight:700}
+.cnt b{font-size:30px;font-variant-numeric:tabular-nums;flex:1;text-align:center}
+.page{display:none;animation:fade .25s}.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.spark{display:flex;align-items:flex-end;gap:5px;height:54px;margin-top:8px}
+.spark>i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--cyan),var(--purple));min-height:3px}
+.obj{padding:14px;border-radius:13px;border:1px solid var(--stroke);background:var(--card2);margin-bottom:11px}
+.obj .t{font-weight:700;font-size:14px;margin-bottom:4px}.obj .m{font-size:11px;color:var(--mut);margin-bottom:9px}
+.tag{font-size:9px;padding:2px 7px;border-radius:12px;background:rgba(120,160,255,.14);color:#b9c6ff;font-weight:700}
+.ev{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.ev .h{font-weight:800;font-variant-numeric:tabular-nums;color:var(--cyan);min-width:46px;font-size:13px}
+.ev .x b{font-size:13.5px;display:block}.ev .x span{font-size:11px;color:var(--mut)}
+.daychip{display:inline-block;font-size:10px;padding:3px 9px;border-radius:20px;background:var(--card2);border:1px solid var(--stroke);margin:0 6px 8px 0;color:var(--mut)}
+.daychip.on{background:var(--grad);color:#06101f;font-weight:800;border-color:transparent}
+.menu a{display:flex;align-items:center;gap:13px;padding:15px;border-radius:13px;border:1px solid var(--stroke);background:var(--card2);margin-bottom:10px;color:var(--txt);text-decoration:none;font-weight:600}
+.menu a .i{font-size:20px;width:26px;text-align:center}
+.menu a .ar{margin-left:auto;color:var(--mut)}
+/* bottom nav */
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:rgba(9,13,24,.92);backdrop-filter:blur(16px);border-top:1px solid var(--stroke);
+  display:flex;justify-content:space-around;padding:8px 6px calc(8px + var(--safe-b));z-index:50;max-width:560px;margin:0 auto}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mut);font-size:9.5px;font-weight:700;padding:5px 0;border:0;background:none}
+.tab .i{font-size:21px;line-height:1}
+.tab.on{color:var(--txt)}.tab.on .i{filter:drop-shadow(0 0 8px rgba(34,224,255,.8))}
+.toast{position:fixed;bottom:calc(100px + var(--safe-b));left:50%;transform:translateX(-50%);background:var(--grad);color:#06101f;padding:13px 22px;border-radius:12px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+.note{font-size:11px;color:var(--mut);line-height:1.5;margin-top:10px}
+h2.pt{font-size:20px;font-weight:800;margin:4px 0 14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="brand"><div class="mk">🔱</div><div><b>ELIO&nbsp;OS</b><small>RENAISSANCE 2027</small></div></div>
+    <div class="clk"><div class="t" id="clk">00:00</div><div class="d" id="dte">—</div></div>
+  </div>
+  <div class="mantra">💬 <b>Petit à petit, mais tous les jours.</b></div>
+
+  <!-- ACCUEIL -->
+  <section class="page on" id="p-dash">
+    <div class="two">
+      <div class="card center"><h3>⚡ Aujourd'hui</h3>
+        <div class="ring"><svg width="118" height="118" viewBox="0 0 118 118">
+          <circle cx="59" cy="59" r="48" stroke="rgba(255,255,255,.07)" stroke-width="10" fill="none"/>
+          <circle id="ringDay" cx="59" cy="59" r="48" stroke="url(#g)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="301" stroke-dashoffset="301"/>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22e0ff"/><stop offset="1" stop-color="#ff5cd0"/></linearGradient></defs>
+        </svg><div class="lab"><b id="dayPct">0%</b><span>FAIT</span></div></div></div>
+      <div class="card center"><h3>🔥 Série</h3><div class="flame">🔥</div><div class="big" id="streakN">0</div><div class="sub">jours d'affilée</div></div>
+    </div>
+    <div class="card center"><h3>🎯 Cap 1er janvier 2027</h3><div class="big" id="cd">—</div><div class="sub">jours pour devenir Elio 2.0</div><div class="bar"><i id="yb"></i></div></div>
+    <div class="card"><h3>🔥 Mes 3 priorités du jour</h3>
+      <input class="input" id="pr0" placeholder="1." style="margin-bottom:8px"><input class="input" id="pr1" placeholder="2." style="margin-bottom:8px"><input class="input" id="pr2" placeholder="3.">
+      <button class="btn" style="margin-top:12px" onclick="savePr()">Enregistrer</button></div>
+    <div class="card"><h3>📅 Mon programme du jour</h3><div id="todayEvents"></div></div>
+  </section>
+
+  <!-- JOUR -->
+  <section class="page" id="p-today">
+    <h2 class="pt">🔥 Ma journée</h2>
+    <div class="card"><h3>Les 5 ancres — coche</h3><div id="anchors"></div></div>
+    <div class="card"><h3>✍️ Mes chiffres</h3>
+      <label class="fld">🚬 Cigarettes</label><div class="cnt"><button onclick="cnt('cig',-1)">−</button><b id="cig">0</b><button onclick="cnt('cig',1)">+</button></div>
+      <label class="fld">☕ Cafés</label><div class="cnt"><button onclick="cnt('cafe',-1)">−</button><b id="cafe">0</b><button onclick="cnt('cafe',1)">+</button></div>
+      <label class="fld">😴 Sommeil (h)</label><input class="input" id="som" type="number" inputmode="decimal" step="0.5" placeholder="ex : 7">
+      <label class="fld">⚖️ Poids (kg)</label><input class="input" id="poids" type="number" inputmode="decimal" step="0.1" placeholder="ex : 84.5">
+      <label class="fld">🌿 Joint ce soir ?</label><select id="joint"><option value="non">Non — soir gagné 💪</option><option value="oui">Oui (encadré)</option></select>
+      <label class="fld">😊 Humeur</label><select id="hum"><option>😀 Top</option><option>🙂 Ok</option><option selected>😐 Moyen</option><option>😔 Bas</option><option>😣 Dur</option></select>
+      <button class="btn" style="margin-top:16px" onclick="saveDay()">💾 Enregistrer ma journée</button></div>
+    <div class="card"><h3>🔁 Mes habitudes</h3><div id="habitList"></div></div>
+  </section>
+
+  <!-- SUIVI -->
+  <section class="page" id="p-suivi">
+    <h2 class="pt">📊 Mon suivi</h2>
+    <div class="two">
+      <div class="card center"><h3>🚬 Cig. / j (7j)</h3><div class="big" id="cigAvg">—</div><div class="spark" id="cigSpark"></div></div>
+      <div class="card center"><h3>🌿 Soirs sans</h3><div class="big" id="sansN">0</div><div class="sub">/ 7 (objectif 3+)</div></div>
+    </div>
+    <div class="card"><h3>📊 Score de vie /100</h3><div id="scoreInputs"></div>
+      <button class="btn" style="margin-top:12px" onclick="calcScore()">Calculer</button>
+      <div class="center" style="margin-top:14px"><div class="ring"><svg width="130" height="130" viewBox="0 0 130 130">
+        <circle cx="65" cy="65" r="54" stroke="rgba(255,255,255,.07)" stroke-width="11" fill="none"/>
+        <circle id="ringScore" cx="65" cy="65" r="54" stroke="url(#g)" stroke-width="11" fill="none" stroke-linecap="round" stroke-dasharray="339" stroke-dashoffset="339"/>
+      </svg><div class="lab"><b id="scoreN">0</b><span>/100</span></div></div><div class="sub" id="scoreMsg">Remplis puis calcule.</div></div></div>
+    <div class="card"><h3>📅 Historique (14 j)</h3><div id="hist"></div></div>
+  </section>
+
+  <!-- CAP / OBJECTIFS -->
+  <section class="page" id="p-goals"><h2 class="pt">🎯 Mes objectifs</h2><div id="goalList"></div>
+    <div class="card"><h3>🗺️ Plan 14 jours</h3><div id="planList"></div></div></section>
+
+  <!-- PLUS -->
+  <section class="page" id="p-more">
+    <h2 class="pt">📅 Agenda & Rappels</h2>
+    <div class="card"><h3>🗓️ Mon programme de la semaine</h3>
+      <div id="dayChips"></div><div id="weekEvents"></div></div>
+    <div class="card"><h3>🔔 Rappels</h3>
+      <button class="btn" onclick="enableNotif()">Activer les rappels du jour</button>
+      <div class="note">Sur iPhone : ajoute d'abord l'app à l'écran d'accueil (voir ci-dessous), puis active. Les rappels se déclenchent quand l'app est ouverte ou en arrière-plan récent. Pour des alarmes 100% fiables, importe aussi le calendrier ↓.</div>
+      <button class="btn ghost" style="margin-top:12px" onclick="downloadICS()">⬇️ Télécharger le calendrier (.ics)</button>
+      <div class="note">Ouvre le fichier téléchargé → « Ajouter tous les événements » → Apple Calendar te sonnera tout seul.</div>
+      <div id="remList" style="margin-top:6px"></div></div>
+    <div class="card menu"><h3>🧭 Plus</h3>
+      <a onclick="go('today')"><span class="i">🔥</span> Ma journée <span class="ar">›</span></a>
+      <a onclick="go('suivi')"><span class="i">📊</span> Suivi & Score <span class="ar">›</span></a>
+      <a onclick="go('goals')"><span class="i">🎯</span> Objectifs & Plan <span class="ar">›</span></a>
+    </div>
+    <div class="card"><h3>📲 Installer sur iPhone</h3>
+      <div class="note" style="font-size:12.5px;color:var(--txt)">1. Ouvre ce lien dans <b>Safari</b>.<br>2. Touche le bouton <b>Partager</b> ⬆️.<br>3. <b>« Sur l'écran d'accueil »</b>.<br>4. L'app apparaît avec son icône 🔱 — comme une vraie app.</div></div>
+  </section>
+</div>
+
+<nav class="tabbar">
+  <button class="tab on" data-p="dash"><span class="i">🏠</span>Accueil</button>
+  <button class="tab" data-p="today"><span class="i">🔥</span>Jour</button>
+  <button class="tab" data-p="suivi"><span class="i">📊</span>Suivi</button>
+  <button class="tab" data-p="goals"><span class="i">🎯</span>Cap</button>
+  <button class="tab" data-p="more"><span class="i">📅</span>Plus</button>
+</nav>
+<div class="toast" id="toast">Enregistré ✅</div>
+
+<script>
+const KEY='ELIO_OS_PWA';
+const S=JSON.parse(localStorage.getItem(KEY)||'{}');
+['logs','priorities','scores','habits','plan','goals'].forEach(k=>S[k]=S[k]||{});
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const tk=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500)};
+
+const ANCHORS=[{id:'eau',t:'💧 Eau avant le 1er café + compter mes clopes'},{id:'lena',t:'👶 30 min Léna, tél. autre pièce'},{id:'lit',t:'😴 Au lit avant 23h'},{id:'sport',t:'🚴 Bougé (vélo/marche)'},{id:'mel',t:'❤️ Une attention pour Mel'}];
+const HABITS=[{id:'eau',t:'💧 Eau avant le café'},{id:'clope',t:'🚬 Compter mes cigarettes'},{id:'lena',t:'👶 30 min Léna tél. loin'},{id:'lit',t:'😴 Au lit avant 23h'},{id:'joint',t:'🌿 Soir sans joint'},{id:'velo',t:'🚴 Vélo / sport'},{id:'prio',t:'🧠 3 priorités le matin'},{id:'mel',t:'❤️ 1 attention pour Mel'}];
+const GOALS=[{t:'😴 Dormir 7h',m:'Santé · 14j',g:'Critique'},{t:'⚖️ Atteindre mon poids cible',m:'Santé · 2027',g:'Critique'},{t:'🌿 Sortir le joint du pilote auto',m:'Addictions · 90j',g:'Critique'},{t:'🚬 Réduire la cigarette puis arrêter',m:'Addictions · 2027',g:'Critique'},{t:'🎯 Finir une chose à la fois',m:'Discipline · 90j',g:'Critique'},{t:'❤️ Couple vivant : 1 date/sem',m:'Couple · 30j',g:'Critique'},{t:'👶 30 min/jour présence Léna',m:'Père · 14j',g:'Critique'},{t:'📈 Écrire mon cadre d\'investissement',m:'Invest · 30j',g:'Critique'},{t:'🏛️ Trancher mes impôts',m:'Impôts · 14j',g:'Critique'},{t:'💰 Faire grossir mon patrimoine',m:'Argent · 2027',g:'Important'},{t:'📰 WMB : 1er client payant',m:'WMB · 90j',g:'Important'},{t:'🏠 Cadrer l\'immobilier avec Mel',m:'Immo · automne',g:'Important'},{t:'💼 Skyline : évoluer / clarifier',m:'Skyline · 2027',g:'Important'},{t:'🌍 Réactiver le plaisir + guitare',m:'Plaisir · 90j',g:'Important'}];
+const PLAN=['💧 Eau + compter mes cigarettes','👶 30 min Léna, tél. autre pièce','😴 Au lit avant 23h','🌿 3 soirs sans joint','🚴 1 séance de vélo','✂️ RDV coiffeur/barbe','🩺 RDV médecin/dentiste','❤️ Réserver un resto avec Mel','🗣️ Dire à Mel ce que j\'admire','🏛️ Décider mes impôts','📝 Ma règle d\'investissement n°1','📰 Offre minimale WMB'];
+const SCROWS=[['Santé',20],['Mental',15],['Couple/Fam',15],['Travail',15],['Argent',15],['Discipline',10],['Plaisir',10]];
+const J=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const EVENTS=[ // day:0=lundi
+ {t:'🧠 Routine matin + 3 priorités',h:'06:40',d:[0,1,2,3,4,5,6]},
+ {t:'💧 Eau avant le café',h:'06:45',d:[0,1,2,3,4,5,6]},
+ {t:'💪 Sport (séance)',h:'07:00',d:[0,2,4]},
+ {t:'🥗 Marche midi',h:'12:30',d:[0,1,2,3,4]},
+ {t:'❤️ Message à Mel',h:'14:00',d:[0,1,2,3,4,5,6]},
+ {t:'💼 Fermeture mentale Skyline',h:'18:00',d:[0,1,2,3,4]},
+ {t:'👶 30 min Léna, tél. loin',h:'18:30',d:[0,1,2,3,4,5,6]},
+ {t:'🌿 Soir SANS joint',h:'20:45',d:[0,2,6]},
+ {t:'🚬 Noter mes cigarettes',h:'21:00',d:[0,1,2,3,4,5,6]},
+ {t:'❤️ Date couple avec Mel',h:'20:30',d:[4]},
+ {t:'📰 Bloc WMB (1 action)',h:'21:00',d:[1,3]},
+ {t:'🧠 5 lignes de journal',h:'21:45',d:[0,1,2,3,4,5,6]},
+ {t:'📵 Écrans coupés, au lit',h:'22:45',d:[0,1,2,3,4,5,6]},
+ {t:'⚖️ Pesée hebdo',h:'08:00',d:[6]},
+ {t:'🌍 Sortie plaisir / famille',h:'15:00',d:[5]},
+ {t:'🔁 Revue + Score de vie',h:'18:30',d:[6]}];
+
+/* NAV */
+function go(p){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.p===p));
+  document.querySelectorAll('.page').forEach(s=>s.classList.remove('on'));
+  document.getElementById('p-'+p).classList.add('on');window.scrollTo(0,0);}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>go(t.dataset.p));
+
+/* CLOCK */
+function tick(){const d=new Date();document.getElementById('clk').textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('dte').textContent=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}).toUpperCase();}
+tick();setInterval(tick,15000);
+
+function countdown(){const t=new Date(2027,0,1),n=new Date();document.getElementById('cd').textContent=Math.ceil((t-n)/864e5);
+  const s=new Date(2026,5,21);document.getElementById('yb').style.width=Math.min(100,Math.max(0,(n-s)/(t-s)*100))+'%';}
+
+const log=()=>S.logs[tk()]||{cig:0,cafe:0,som:'',poids:'',joint:'non',hum:'😐 Moyen',anchors:{}};
+function cnt(f,d){const l=log();l[f]=Math.max(0,(l[f]||0)+d);S.logs[tk()]=l;save();document.getElementById(f).textContent=l[f];renderDash();renderSuivi();}
+function renderToday(){const l=log();cig.textContent=l.cig||0;cafe.textContent=l.cafe||0;som.value=l.som||'';poids.value=l.poids||'';joint.value=l.joint||'non';hum.value=l.hum||'😐 Moyen';
+  const a=document.getElementById('anchors');a.innerHTML='';ANCHORS.forEach(an=>{const on=l.anchors&&l.anchors[an.id];a.innerHTML+=`<div class="row"><span>${an.t}</span><div class="chk ${on?'done':''}" onclick="tAnchor('${an.id}')">${on?'✓':''}</div></div>`;});
+  const h=S.habits[tk()]||{},c=document.getElementById('habitList');c.innerHTML='';HABITS.forEach(x=>{const on=h[x.id];c.innerHTML+=`<div class="row"><span>${x.t}</span><div class="chk ${on?'done':''}" onclick="tHabit('${x.id}')">${on?'✓':''}</div></div>`;});}
+function tAnchor(id){const l=log();l.anchors=l.anchors||{};l.anchors[id]=!l.anchors[id];S.logs[tk()]=l;save();renderToday();renderDash();}
+function tHabit(id){const h=S.habits[tk()]||{};h[id]=!h[id];S.habits[tk()]=h;save();renderToday();renderDash();}
+function saveDay(){const l=log();l.som=som.value;l.poids=poids.value;l.joint=joint.value;l.hum=hum.value;S.logs[tk()]=l;save();toast('Journée enregistrée ✅');renderDash();renderSuivi();}
+function savePr(){S.priorities[tk()]=[0,1,2].map(i=>document.getElementById('pr'+i).value);save();toast('Priorités posées 🎯');}
+function renderPr(){const p=S.priorities[tk()]||['','',''];[0,1,2].forEach(i=>document.getElementById('pr'+i).value=p[i]||'');}
+
+function streak(){let s=0,d=new Date();for(let i=0;i<400;i++){const l=S.logs[tk(d)],ok=l&&l.anchors&&l.anchors.eau&&l.anchors.lena&&l.anchors.lit;
+  if(ok){s++;d.setDate(d.getDate()-1);}else{if(i===0){d.setDate(d.getDate()-1);continue;}break;}}return s;}
+function todayEvents(){const dw=(new Date().getDay()+6)%7;return EVENTS.filter(e=>e.d.includes(dw)).sort((a,b)=>a.h<b.h?-1:1);}
+function renderDash(){const l=log(),done=ANCHORS.filter(a=>l.anchors&&l.anchors[a.id]).length,pct=Math.round(done/ANCHORS.length*100);
+  document.getElementById('ringDay').style.strokeDashoffset=301-301*pct/100;document.getElementById('dayPct').textContent=pct+'%';
+  document.getElementById('streakN').textContent=streak();countdown();
+  const te=document.getElementById('todayEvents');te.innerHTML='';todayEvents().forEach(e=>te.innerHTML+=`<div class="ev"><div class="h">${e.h}</div><div class="x"><b>${e.t}</b></div></div>`);}
+
+function last7(){const o=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);o.push(S.logs[tk(d)]||{});}return o;}
+function sans(){return last7().filter(l=>l.joint==='non').length;}
+function renderSuivi(){const w=last7(),cig7=w.map(l=>+l.cig||0);
+  document.getElementById('cigAvg').textContent=(cig7.reduce((a,b)=>a+b,0)/7).toFixed(1);document.getElementById('sansN').textContent=sans();
+  const mx=Math.max(1,...cig7);document.getElementById('cigSpark').innerHTML=cig7.map(v=>`<i style="height:${v/mx*100}%"></i>`).join('');
+  const h=document.getElementById('hist');h.innerHTML='';for(let i=0;i<14;i++){const d=new Date();d.setDate(d.getDate()-i);const l=S.logs[tk(d)];if(!l)continue;
+    h.innerHTML+=`<div class="row" style="font-size:12.5px"><span>${d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})}</span><span style="color:var(--mut)">🚬${l.cig||0} ☕${l.cafe||0} 🌿${l.joint==='non'?'<span style="color:var(--green)">✓</span>':'×'} 😴${l.som||'—'} ${l.hum||''}</span></div>`;}
+  if(!h.innerHTML)h.innerHTML='<div class="sub">Enregistre une journée pour voir ton historique.</div>';}
+function renderScoreInputs(){const c=document.getElementById('scoreInputs');c.innerHTML='';SCROWS.forEach((r,i)=>c.innerHTML+=`<label class="fld">${r[0]} (max ${r[1]})</label><input class="input" type="number" inputmode="numeric" id="sc${i}" placeholder="0-${r[1]}">`);}
+function calcScore(){let t=0;SCROWS.forEach((r,i)=>t+=Math.min(r[1],+document.getElementById('sc'+i).value||0));document.getElementById('scoreN').textContent=t;
+  document.getElementById('ringScore').style.strokeDashoffset=339-339*t/100;
+  document.getElementById('scoreMsg').textContent=t<40?'Survie. On se relève.':t<60?'Reprise 💪':t<75?'Sur les rails':t<90?'Solide':'ELIO 2.0 🔱';
+  S.scores['S'+tk()]=t;save();toast('Score : '+t+'/100');}
+function renderGoals(){const c=document.getElementById('goalList');c.innerHTML='';GOALS.forEach((g,i)=>{const p=S.goals[i]||0;
+  c.innerHTML+=`<div class="obj"><div class="t">${g.t}</div><div class="m">${g.m} <span class="tag">${g.g}</span></div><input type="range" min="0" max="100" value="${p}" style="width:100%" oninput="setGoal(${i},this.value)"><div class="bar"><i style="width:${p}%"></i></div><div class="sub" id="gp${i}">${p}%</div></div>`;});}
+function setGoal(i,v){S.goals[i]=+v;save();document.getElementById('gp'+i).textContent=v+'%';document.querySelectorAll('#goalList .bar>i')[i].style.width=v+'%';}
+function renderPlan(){const c=document.getElementById('planList');c.innerHTML='';PLAN.forEach((t,i)=>{const on=S.plan[i];c.innerHTML+=`<div class="row"><span>${t}</span><div class="chk ${on?'done':''}" onclick="tPlan(${i})">${on?'✓':''}</div></div>`;});}
+function tPlan(i){S.plan[i]=!S.plan[i];save();renderPlan();}
+
+/* AGENDA */
+let selDay=(new Date().getDay()+6)%7;
+function renderAgenda(){const dc=document.getElementById('dayChips');dc.innerHTML='';J.forEach((j,i)=>dc.innerHTML+=`<span class="daychip ${i===selDay?'on':''}" onclick="selDay=${i};renderAgenda()">${j}</span>`);
+  const we=document.getElementById('weekEvents');we.innerHTML='';EVENTS.filter(e=>e.d.includes(selDay)).sort((a,b)=>a.h<b.h?-1:1).forEach(e=>we.innerHTML+=`<div class="ev"><div class="h">${e.h}</div><div class="x"><b>${e.t}</b></div></div>`);
+  const rl=document.getElementById('remList');rl.innerHTML='<div class="note" style="margin-top:14px;color:var(--txt)"><b>Rappels quotidiens :</b></div>';
+  [['06:45','💧 Eau avant le café'],['14:00','❤️ Message à Mel'],['18:30','👶 30 min Léna'],['21:00','🚬 Noter mes cigarettes'],['22:45','📵 Au lit']].forEach(r=>rl.innerHTML+=`<div class="ev"><div class="h">${r[0]}</div><div class="x"><b>${r[1]}</b></div></div>`);}
+
+/* NOTIFICATIONS (best effort) */
+function enableNotif(){if(!('Notification'in window)){toast('Notifications non supportées ici');return;}
+  Notification.requestPermission().then(p=>{if(p==='granted'){toast('Rappels activés 🔔');scheduleToday();}else toast('Permission refusée');});}
+function scheduleToday(){const now=new Date();[['06:45','💧 Eau avant le café'],['14:00','❤️ Message à Mel'],['18:30','👶 30 min Léna, tél. loin'],['21:00','🚬 Noter mes cigarettes'],['22:45','📵 Écrans coupés, au lit']].forEach(r=>{
+  const [h,m]=r[0].split(':');const t=new Date();t.setHours(+h,+m,0,0);const ms=t-now;if(ms>0&&ms<864e5)setTimeout(()=>{try{new Notification('Elio OS',{body:r[1]});}catch(e){}},ms);});}
+
+/* ICS */
+function pad(n){return String(n).padStart(2,'0')}
+function nextDate(days){const r=new Date();for(let i=0;i<7;i++){const d=new Date(r);d.setDate(r.getDate()+i);if(days.includes((d.getDay()+6)%7))return d;}return r;}
+function downloadICS(){const BY=['MO','TU','WE','TH','FR','SA','SU'];let o=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Elio OS//FR','CALSCALE:GREGORIAN','X-WR-CALNAME:🔱 Renaissance OS'];
+  EVENTS.forEach((e,i)=>{const d=nextDate(e.d),[h,m]=e.h.split(':');const dt=`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(h)}${pad(m)}00`;
+    o.push('BEGIN:VEVENT','UID:elio-'+i+'@os',`DTSTART:${dt}`,`DURATION:PT30M`,`RRULE:FREQ=WEEKLY;BYDAY=${e.d.map(x=>BY[x]).join(',')}`,`SUMMARY:${e.t}`,'BEGIN:VALARM','ACTION:DISPLAY','TRIGGER:-PT0M','DESCRIPTION:'+e.t,'END:VALARM','END:VEVENT');});
+  o.push('END:VCALENDAR');const b=new Blob([o.join('\r\n')],{type:'text/calendar'});const u=URL.createObjectURL(b);
+  const a=document.createElement('a');a.href=u;a.download='renaissance-elio.ics';a.click();setTimeout(()=>URL.revokeObjectURL(u),3000);toast('Calendrier téléchargé 📅');}
+
+/* SW */
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+renderToday();renderPr();renderSuivi();renderScoreInputs();renderGoals();renderPlan();renderDash();renderAgenda();
+if(S.scores['S'+tk()]!==undefined)document.getElementById('scoreN').textContent=S.scores['S'+tk()];
+</script>
+</body>
+</html>
