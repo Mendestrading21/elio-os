@@ -394,7 +394,7 @@ function renderExports(){
 function renderSettings(){
   return `<h2 class="pt">⚙️ Réglages</h2><div class="psub">Profil · thème · données · confidentialité.</div>
   <div class="card"><h3>👤 Profil</h3><label class="fld">Prénom</label><input class="input" value="${esc(S.settings.name)}" oninput="S.settings.name=this.value;save()">
-    <label class="fld">Objectif principal</label><input class="input" value="${esc(S.settings.goal||'Devenir Elio 2.0 d\\'ici le 1er janvier 2027')}" oninput="S.settings.goal=this.value;save()">
+    <label class="fld">Objectif principal</label><input class="input" value="${esc(S.settings.goal||'Devenir Elio 2.0 d\'ici le 1er janvier 2027')}" oninput="S.settings.goal=this.value;save()">
     <div class="row" style="margin-top:8px"><span>🎯 Date cible</span><b>1er janvier 2027</b></div></div>
   <div class="card" style="margin-top:15px"><h3>🎚️ Régler mes 7 jauges (Life Score)</h3>
     ${GAUGES.map(g=>`<div class="gauge"><div class="gt"><span>${g[0]}</span><b class="mono" id="gv_${g[1]}">${gauge(g[1])}</b></div><input type="range" min="0" max="100" value="${gauge(g[1])}" style="width:100%" oninput="S.gauges['${g[1]}']=+this.value;$('gv_${g[1]}').textContent=this.value;save()"></div>`).join('')}</div>
