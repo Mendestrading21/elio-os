@@ -1,5 +1,5 @@
 // Elio OS — service worker V100 (network-first pour le HTML, cache pour le reste)
-const CACHE = 'elio-os-v100';
+const CACHE = 'elio-os-v101';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png'];
 
 self.addEventListener('install', e => {
